@@ -34,6 +34,18 @@ class CLI:
 
         else:
             print("No Task Found")
+
+    def delete_task(self, id):
+        """Delete a Task"""
+
+        tasks = session.query(Todo).filter(Todo.id == id).first()
+
+        if tasks:
+            session.delete(tasks)
+            session.commit()
+            print("Task Deleted Successfuly")
+        else:
+            print("Task not found.")
                 
 
 
