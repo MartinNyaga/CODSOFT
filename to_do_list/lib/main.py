@@ -43,9 +43,28 @@ class CLI:
         if tasks:
             session.delete(tasks)
             session.commit()
-            print("Task Deleted Successfuly")
+            print("Task Deleted Successfully")
         else:
             print("Task not found.")
+
+    def update_task(self, id, todo_name, description, due_date):
+        """Update a Task"""
+
+        tasks = session.query(Todo).filter(Todo.id == id).first()
+
+        now = datetime.utcnow()
+
+        finish_date = datetime.strptime(due_date, '%Y-%m-%d').date()
+
+        if tasks:
+            tasks.todo_name = todo_name
+            tasks.description = description
+            tasks.due_date = finish_date
+            tasks.updated_at = now
+            session.commit()
+            print("Task updated successfully")
+        else:
+            print("Task Not Found")
                 
 
 
