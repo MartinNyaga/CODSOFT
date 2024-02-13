@@ -65,6 +65,18 @@ class CLI:
             print("Task updated successfully")
         else:
             print("Task Not Found")
+
+    def complete_task(self, id):
+        """Complete a Task"""
+
+        tasks = session.query(Todo).filter(Todo.id == id).first()
+
+        if tasks:
+            tasks.completed = True
+            session.commit()
+            print(f"Task {tasks.id} Completed")
+        else:
+            print(f"Task {tasks.id} Not Found")
                 
 
 
